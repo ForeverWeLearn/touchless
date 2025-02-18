@@ -1,3 +1,15 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+body {
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+}
+
+a {
+    -webkit-user-drag: none;
+}
