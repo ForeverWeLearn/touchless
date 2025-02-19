@@ -9,6 +9,10 @@ let results: HandLandmarkerResult;
 let next_trigger_time = 0;
 
 async function inference(engine: Engine) {
+  if (!engine.state) {
+    return;
+  }
+
   const current_time = performance.now();
 
   if (current_time < next_trigger_time) {
@@ -49,6 +53,8 @@ async function inference(engine: Engine) {
 }
 
 export class Engine {
+  public state = false;
+
   public landmarker!: HandLandmarker;
   public gesture_classifier: GestureClassifier[] = [];
   public gesture_parser: GestureParser[] = [new GestureParser(), new GestureParser()];
@@ -119,6 +125,7 @@ export class Engine {
   }
 
   public set_state(state: boolean) {
+    this.state = state;
     if (state) {
       this.connect_camera();
     } else {
