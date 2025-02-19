@@ -1,33 +1,28 @@
 import { HandLandmarker } from "@mediapipe/tasks-vision";
 
-export function draw_landmarks(
-  keypoints: number[][],
-  canvasCtx: CanvasRenderingContext2D,
-  color: string,
-  radius = 2
-) {
+export function draw_landmarks(keypoints: number[][], context_2d: CanvasRenderingContext2D, color: string, radius = 2) {
   for (const keypoint of keypoints) {
-    canvasCtx.fillStyle = color;
-    canvasCtx.beginPath();
-    canvasCtx.arc(keypoint[0], keypoint[1], radius, 0, 2 * Math.PI);
-    canvasCtx.fill();
+    context_2d.fillStyle = color;
+    context_2d.beginPath();
+    context_2d.arc(keypoint[0], keypoint[1], radius, 0, 2 * Math.PI);
+    context_2d.fill();
   }
 }
 
 export function draw_connections(
   keypoints: number[][],
-  canvasCtx: CanvasRenderingContext2D,
+  context_2d: CanvasRenderingContext2D,
   color: string,
   thickness = 2
 ) {
   for (const connection of HandLandmarker.HAND_CONNECTIONS) {
     const start = keypoints[connection.start];
     const end = keypoints[connection.end];
-    canvasCtx.strokeStyle = color;
-    canvasCtx.lineWidth = thickness;
-    canvasCtx.beginPath();
-    canvasCtx.moveTo(start[0], start[1]);
-    canvasCtx.lineTo(end[0], end[1]);
-    canvasCtx.stroke();
+    context_2d.strokeStyle = color;
+    context_2d.lineWidth = thickness;
+    context_2d.beginPath();
+    context_2d.moveTo(start[0], start[1]);
+    context_2d.lineTo(end[0], end[1]);
+    context_2d.stroke();
   }
 }

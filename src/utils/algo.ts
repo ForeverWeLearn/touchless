@@ -26,18 +26,12 @@ export function normalize_keypoints(keypoints: number[][]): number[] {
 
   let flat_rel_keypoints: number[] = rel_keypoints.flat();
 
-  let max_value = flat_rel_keypoints.reduce(
-    (max, x) => Math.max(max, Math.abs(x)),
-    -Infinity
-  );
+  let max_value = flat_rel_keypoints.reduce((max, x) => Math.max(max, Math.abs(x)), -Infinity);
 
   return flat_rel_keypoints.map((x) => x / max_value);
 }
 
-export function calc_keypoints(
-  landmarks: NormalizedLandmark[],
-  canvas: HTMLCanvasElement
-): number[][] {
+export function calc_keypoints(landmarks: NormalizedLandmark[], canvas: HTMLCanvasElement): number[][] {
   let imgw = canvas.width;
   let imgh = canvas.height;
 

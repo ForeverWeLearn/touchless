@@ -13,11 +13,7 @@ export class GestureClassifier {
   }
 
   public inference(normalized_keypoints) {
-    const input_tensor = new tf.tensor(
-      normalized_keypoints,
-      [1, 42],
-      "float32"
-    );
+    const input_tensor = new tf.tensor(normalized_keypoints, [1, 42], "float32");
 
     let feeds = { [this.model.inputs[0].name]: input_tensor };
 
