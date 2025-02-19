@@ -1,33 +1,29 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { engine_state_store } from "./stores/engine_state";
+import { debug_view_store } from "./stores/debug_view";
 import { RouterView } from "vue-router";
 import { Engine } from "./scripts/engine";
-import NavBar from "./components/NavBar.vue";
+import { watch } from "vue";
 import DebugView from "./views/DebugView.vue";
+import NavBar from "./components/NavBar.vue";
 
+const engine_state = engine_state_store();
+const debug_view = debug_view_store();
 const engine = new Engine();
-const debugMarginTop = ref("margin-top: 0");
 
-function setDebugVisible(state: boolean) {
-  if (state) {
-    debugMarginTop.value = "margin-top: 0";
-  } else {
-    debugMarginTop.value = "margin-top: -100vh";
-  }
-}
+watch(engine_state, () => {
+  engine.set_state(engine_state.state);
+});
 
-setDebugVisible(false);
+debug_view.set_visible(false);
 </script>
 
 <template>
   <header>
-    <NavBar
-      @changeEngineState="(state: boolean) => engine.setState(state)"
-      @changeDebugState="(state: boolean) => setDebugVisible(state)"
-    />
+    <NavBar />
   </header>
   <main>
-    <DebugView :style="debugMarginTop" />
+    <DebugView />
     <RouterView />
   </main>
 </template>
