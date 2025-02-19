@@ -15,6 +15,7 @@ watch(engine_state, () => {
   engine.set_state(engine_state.state);
 });
 
+document.addEventListener("contextmenu", (event) => event.preventDefault());
 debug_view.set_visible(false);
 </script>
 
