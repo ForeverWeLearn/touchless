@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import { engine_state_store } from "../stores/engine_state";
 import { debug_view_store } from "../stores/debug_view";
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { RouterLink } from "vue-router";
 
 const engine_state = engine_state_store();
 const debug_view = debug_view_store();
 const appWindow = getCurrentWindow();
 
-document
-  .getElementById('titlebar-minimize')
-  ?.addEventListener('click', () => appWindow.minimize());
-document
-  .getElementById('titlebar-maximize')
-  ?.addEventListener('click', () => appWindow.toggleMaximize());
-document
-  .getElementById('titlebar-close')
-  ?.addEventListener('click', () => appWindow.close());
+document.getElementById("titlebar-minimize")?.addEventListener("click", () => appWindow.minimize());
+document.getElementById("titlebar-maximize")?.addEventListener("click", () => appWindow.toggleMaximize());
+document.getElementById("titlebar-close")?.addEventListener("click", () => appWindow.close());
 
 document.addEventListener("mousemove", function (event) {
   const navbar: any = document.getElementsByClassName("navbar")[0];
