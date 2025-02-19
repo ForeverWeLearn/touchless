@@ -19,7 +19,7 @@ if (props.left) {
     <h1>
       <slot>HANDEDNESS</slot>
     </h1>
-    <h4 class="mb-4" style="word-break: break-all">{{ hand_result.gesture }}</h4>
+    <h4 class="mb-4" style="word-break: break-all">{{ hand_result.gesture_text }}</h4>
 
     <div class="d-flex align-items-center justify-content-center">
       <img :src="hand_result.icon_path" alt="Gesture" class="img-fluid" />

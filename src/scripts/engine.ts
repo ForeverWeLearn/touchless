@@ -26,6 +26,10 @@ async function inference(engine: Engine) {
 
   if (results.landmarks.length == 0) {
     next_trigger_time = current_time + 250;
+    engine.hand_result[0].hold_time = 0;
+    engine.hand_result[1].hold_time = 0;
+    engine.hand_result[0].scanning = true;
+    engine.hand_result[1].scanning = true;
     window.requestAnimationFrame(() => inference(engine));
     return;
   }
@@ -45,6 +49,7 @@ async function inference(engine: Engine) {
 
     engine.hand_result[handedness].gesture = engine.gesture_parser[handedness].labels[label_id];
     engine.hand_result[handedness].hold_time = engine.gesture_parser[handedness].hold_time;
+    engine.hand_result[handedness].scanning = false;
 
     i += 1;
   }
@@ -126,6 +131,8 @@ export class Engine {
 
   public set_state(state: boolean) {
     this.state = state;
+    this.hand_result[0].engine_state = state;
+    this.hand_result[1].engine_state = state;
     if (state) {
       this.connect_camera();
     } else {
