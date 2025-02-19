@@ -1,5 +1,5 @@
 <template>
-  <div class="homepage">
+  <div class="homepage" data-tauri-drag-region>
     <div class="overlay">
       <h1 class="app-name">Touchless</h1>
       <p class="tagline">Touch Nothing, Control Everything!</p>
@@ -8,30 +8,32 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "HomePage",
-};
-</script>
-
 <style scoped>
 /* Full-Screen Background & Fix Overlapping Navbar */
 .homepage {
-  height: 100vh; /* Full screen */
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(45deg, #ff6b6b, #ffb830, #30cfd0, #330867);
   background-size: 300% 300%;
   animation: gradientBG 10s ease infinite;
-  padding-top: 80px; /* Push content down below navbar */
+  padding-top: 80px;
 }
 
 /* Animated Background */
 @keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .overlay {
