@@ -82,17 +82,17 @@ export class Engine {
   }
 
   private async load_model() {
-    const fileset_resolver = await FilesetResolver.forVisionTasks("wasm");
+    const fileset_resolver = await FilesetResolver.forVisionTasks("mediapipe");
     this.landmarker = await HandLandmarker.createFromOptions(fileset_resolver, {
       baseOptions: {
-        modelAssetPath: "hand_landmarker.task",
+        modelAssetPath: "mediapipe/hand_landmarker.task",
         delegate: "GPU",
       },
       runningMode: "VIDEO",
       numHands: 2,
     });
-    this.gesture_classifier[0] = new GestureClassifier("gesture_classifier_left.tflite");
-    this.gesture_classifier[1] = new GestureClassifier("gesture_classifier_right.tflite");
+    this.gesture_classifier[0] = new GestureClassifier("models/gesture_classifier_left.tflite");
+    this.gesture_classifier[1] = new GestureClassifier("models/gesture_classifier_right.tflite");
   }
 
   private connect_camera() {
